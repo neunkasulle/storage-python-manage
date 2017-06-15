@@ -14,26 +14,14 @@ from azure_devtools.scenario_tests import (
     RecordingProcessor,
 )
 
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
 from example import run_example, STORAGE_ACCOUNT_NAME
 
-TEST_CONFIG = os.path.join(os.path.dirname(__file__), 'testsettings.cfg')
 
+TEST_CONFIG = os.path.join(os.path.dirname(__file__), 'testsettings.cfg')
 
 DUMMY_UUID = '11111111-1111-1111-1111-111111111111'
 DUMMY_SECRET = '00000000000000000000000000000000000000000000'
 DUMMY_STORAGE_NAME = 'storagemgmtexample'
-
-# --- vcr debug
-import vcr
-import requests
-import logging
-
-logging.basicConfig() # you need to initialize logging, otherwise you will not see anything from vcrpy
-vcr_log = logging.getLogger("vcr")
-vcr_log.setLevel(logging.INFO)
-# ---
 
 
 class AccessTokenProcessor(RecordingProcessor):
