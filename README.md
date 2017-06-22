@@ -4,7 +4,7 @@ platforms: python
 author: lmazuel
 ---
 
-https://travis-ci.org/Azure-Samples/storage-python-manage.svg?branch=master
+[![Build Status](https://travis-ci.org/Azure-Samples/storage-python-manage.svg?branch=master)](https://travis-ci.org/Azure-Samples/storage-python-manage)
 
 # Getting Started with Azure Storage Resource Provider in Python
 
