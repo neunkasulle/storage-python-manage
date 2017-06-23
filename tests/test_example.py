@@ -10,6 +10,7 @@ from azure_devtools.scenario_tests import (
     ReplayableTest,
     GeneralNameReplacer,
     SubscriptionRecordingProcessor,
+    AccessTokenReplacer,
     patch_long_run_operation_delay,
     RecordingProcessor,
 )
@@ -24,20 +25,6 @@ DUMMY_SECRET = '00000000000000000000000000000000000000000000'
 DUMMY_STORAGE_NAME = 'storagemgmtexample'
 
 
-class AccessTokenProcessor(RecordingProcessor):
-    def process_response(self, response):
-        import json
-        try:
-            body = json.loads(response['body']['string'])
-            body['access_token'] = 'fake_token'
-        except KeyError:
-            return response
-        except json.JSONDecodeError:
-            return response
-        response['body']['string'] = json.dumps(body)
-        return response
-
-
 class StorageExampleTest(ReplayableTest):
     def __init__(self, method_name, **kwargs):
         self.scrubber = GeneralNameReplacer()
@@ -47,7 +34,7 @@ class StorageExampleTest(ReplayableTest):
             recording_processors=[
                 self.scrubber,
                 SubscriptionRecordingProcessor(DUMMY_UUID),
-                AccessTokenProcessor(),
+                AccessTokenReplacer(),
             ],
             replay_patches=[
                 patch_long_run_operation_delay,
