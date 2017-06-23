@@ -6,9 +6,9 @@ author: lmazuel
 
 [![Build Status](https://travis-ci.org/Azure-Samples/storage-python-manage.svg?branch=master)](https://travis-ci.org/Azure-Samples/storage-python-manage)
 
-# Getting Started with Azure Storage Resource Provider in Python
+# Getting Started with Azure Storage Management in Python
 
-This sample shows how to manage your storage account using the Azure Storage Resource Provider for Python. The Storage Resource Provider is a client library for working with the storage accounts in your Azure subscription. Using the client library, you can create a new storage account, read its properties, list all storage accounts in a given subscription or resource group, read and regenerate the storage account keys, and delete a storage account.  
+This sample shows how to manage your storage account using the Azure Storage Management package for Python. The Storage Resource Provider is a client library for working with the storage accounts in your Azure subscription. Using the client library, you can create a new storage account, read its properties, list all storage accounts in a given subscription or resource group, read and regenerate the storage account keys, and delete a storage account.  
 
 
 **On this page**
@@ -151,7 +151,7 @@ for item in storage_client.storage_accounts.list():
     print_item(item)
 ```
 
-<a name="list-storage-accounts-rf"></a>
+<a name="list-storage-accounts-rg"></a>
 ### List storage accounts by resource group
 
 ```python
