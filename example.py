@@ -68,7 +68,7 @@ def run_example():
         GROUP_NAME,
         STORAGE_ACCOUNT_NAME,
         StorageAccountCreateParameters(
-            sku=Sku(SkuName.standard_ragrs),
+            sku=Sku(name=SkuName.standard_ragrs),
             kind=Kind.storage,
             location='westus'
         )
@@ -119,7 +119,7 @@ def run_example():
     storage_account = storage_client.storage_accounts.update(
         GROUP_NAME, STORAGE_ACCOUNT_NAME,
         StorageAccountUpdateParameters(
-            sku=Sku(SkuName.standard_grs)
+            sku=Sku(name=SkuName.standard_grs)
         )
     )
     print_item(storage_account)
@@ -139,7 +139,7 @@ def run_example():
 
     # List usage
     print('List usage')
-    for usage in storage_client.usage.list():
+    for usage in storage_client.usages.list_by_location("westus"):
         print('\t{}'.format(usage.name.value))
 
 def print_item(group):

@@ -8,7 +8,7 @@ author: lmazuel
 
 # Getting Started with Azure Storage Management in Python
 
-This sample shows how to manage your storage account using the Azure Storage Management package for Python. The Storage Resource Provider is a client library for working with the storage accounts in your Azure subscription. Using the client library, you can create a new storage account, read its properties, list all storage accounts in a given subscription or resource group, read and regenerate the storage account keys, and delete a storage account.  
+This sample shows how to manage your storage account using the Azure Storage Management package for Python. The Storage Resource Provider is a client library for working with the storage accounts in your Azure subscription. Using the client library, you can create a new storage account, read its properties, list all storage accounts in a given subscription or resource group, read and regenerate the storage account keys, and delete a storage account.
 
 
 **On this page**
@@ -32,14 +32,17 @@ This sample shows how to manage your storage account using the Azure Storage Man
 
 1. If you don't already have it, [install Python](https://www.python.org/downloads/).
 
-2. We recommend using a [virtual environment](https://docs.python.org/3/tutorial/venv.html) to run this example, but it's not mandatory. You can initialize a virtual environment this way:
+2. General recommendation for Python development is to use a Virtual Environment. For more information, see https://docs.python.org/3/tutorial/venv.html
 
-    ```
-    pip install virtualenv
-    virtualenv mytestenv
-    cd mytestenv
-    source bin/activate
-    ```
+   Install and initialize the virtual environment with the "venv" module on Python 3 (you must install [virtualenv](https://pypi.python.org/pypi/virtualenv) for Python 2.7):
+
+   ```
+   python -m venv mytestenv # Might be "python3" or "py -3.6" depending on your Python installation
+   cd mytestenv
+   source bin/activate      # Linux shell (Bash, ZSH, etc.) only
+   ./scripts/activate       # PowerShell only
+   ./scripts/activate.bat   # Windows CMD only
+   ```
 
 3. Clone the repository.
 
@@ -54,12 +57,12 @@ This sample shows how to manage your storage account using the Azure Storage Man
     pip install -r requirements.txt
     ```
 
-5. Create an Azure service principal, using 
+5. Create an Azure service principal, using
 [Azure CLI](http://azure.microsoft.com/documentation/articles/resource-group-authenticate-service-principal-cli/),
 [PowerShell](http://azure.microsoft.com/documentation/articles/resource-group-authenticate-service-principal/)
 or [Azure Portal](http://azure.microsoft.com/documentation/articles/resource-group-create-service-principal-portal/).
 
-6. Export these environment variables into your current shell. 
+6. Export these environment variables into your current shell.
 
     ```
     export AZURE_TENANT_ID={your tenant id}
@@ -127,7 +130,7 @@ storage_async_operation = storage_client.storage_accounts.create(
     GROUP_NAME,
     STORAGE_ACCOUNT_NAME,
     StorageAccountCreateParameters(
-        sku=Sku(SkuName.standard_ragrs),
+        sku=Sku(name=SkuName.standard_ragrs),
         kind=Kind.storage,
         location='westus'
     )
@@ -190,7 +193,7 @@ The storage account SKU specifies what type of replication applies to the storag
 storage_account = storage_client.storage_accounts.update(
     GROUP_NAME, STORAGE_ACCOUNT_NAME,
     StorageAccountUpdateParameters(
-        sku=Sku(SkuName.standard_grs)
+        sku=Sku(name=SkuName.standard_grs)
     )
 )
 ```
@@ -205,16 +208,16 @@ Note that modifying the SKU for a production storage account may have associated
 storage_client.storage_accounts.delete(GROUP_NAME, STORAGE_ACCOUNT_NAME)
 ```
 
-<a name="usage"></a>
-### List usage
+<a name="usages"></a>
+### List usages
 
 ```python
-for usage in storage_client.usage.list():
+for usage in storage_client.usages.list_by_location("westus"):
     print('\t{}'.format(usage.name.value))
 ```
 
 <a name="more-info"></a>
 ## More information
 
-- [Azure SDK for Python](http://github.com/Azure/azure-sdk-for-python) 
+- [Azure SDK for Python](http://github.com/Azure/azure-sdk-for-python)
 - [Azure Storage Documentation](https://azure.microsoft.com/services/storage/)

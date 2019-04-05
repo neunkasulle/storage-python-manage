@@ -1,6 +1,9 @@
 import os
 import unittest
-from mock import patch
+try:
+    from unittest import mock
+except ImportError:
+    import mock
 
 from six.moves.urllib_parse import quote_plus
 
@@ -62,8 +65,8 @@ class StorageExampleTest(ReplayableTest):
         if self.is_live:
             run_example()
         else:
-            with patch('example.get_credentials', StorageExampleTest.fake_credentials), \
-                 patch('example.STORAGE_ACCOUNT_NAME', DUMMY_STORAGE_NAME):
+            with mock.patch('example.get_credentials', StorageExampleTest.fake_credentials), \
+                 mock.patch('example.STORAGE_ACCOUNT_NAME', DUMMY_STORAGE_NAME):
                 run_example()
 
 
