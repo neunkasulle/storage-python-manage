@@ -66,7 +66,7 @@ class StorageExampleTest(ReplayableTest):
             run_example()
         else:
             with mock.patch('example.get_credentials', StorageExampleTest.fake_credentials), \
-                 mock.patch('example.STORAGE_ACCOUNT_NAME', DUMMY_STORAGE_NAME):
+                    mock.patch('example.STORAGE_ACCOUNT_NAME', DUMMY_STORAGE_NAME):
                 run_example()
 
 

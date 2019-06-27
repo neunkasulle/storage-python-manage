@@ -19,7 +19,7 @@ STORAGE_ACCOUNT_NAME = Haikunator().haikunate(delimiter='')
 def get_credentials():
     subscription_id = os.environ.get(
         'AZURE_SUBSCRIPTION_ID',
-        '11111111-1111-1111-1111-111111111111') # your Azure Subscription Id
+        '11111111-1111-1111-1111-111111111111')  # your Azure Subscription Id
     credentials = ServicePrincipalCredentials(
         client_id=os.environ['AZURE_CLIENT_ID'],
         secret=os.environ['AZURE_CLIENT_SECRET'],
@@ -34,6 +34,8 @@ def get_credentials():
 # AZURE_CLIENT_SECRET: with your Azure Active Directory Application Secret
 # AZURE_SUBSCRIPTION_ID: with your Azure Subscription Id
 #
+
+
 def run_example():
     """Storage management example."""
     #
@@ -50,14 +52,17 @@ def run_example():
 
     # Create Resource group
     print('Create Resource Group')
-    resource_group_params = {'location':'westus'}
-    print_item(resource_client.resource_groups.create_or_update(GROUP_NAME, resource_group_params))
+    resource_group_params = {'location': 'westus'}
+    print_item(resource_client.resource_groups.create_or_update(
+        GROUP_NAME, resource_group_params))
 
     # Check availability
     print('Check name availability')
     bad_account_name = 'invalid-or-used-name'
-    availability = storage_client.storage_accounts.check_name_availability(bad_account_name)
-    print('The account {} is available: {}'.format(bad_account_name, availability.name_available))
+    availability = storage_client.storage_accounts.check_name_availability(
+        bad_account_name)
+    print('The account {} is available: {}'.format(
+        bad_account_name, availability.name_available))
     print('Reason: {}'.format(availability.reason))
     print('Detailed message: {}'.format(availability.message))
     print('\n\n')
@@ -98,7 +103,8 @@ def run_example():
 
     # Get the account keys
     print('Get the account keys')
-    storage_keys = storage_client.storage_accounts.list_keys(GROUP_NAME, STORAGE_ACCOUNT_NAME)
+    storage_keys = storage_client.storage_accounts.list_keys(
+        GROUP_NAME, STORAGE_ACCOUNT_NAME)
     storage_keys = {v.key_name: v.value for v in storage_keys.keys}
     print('\tKey 1: {}'.format(storage_keys['key1']))
     print('\tKey 2: {}'.format(storage_keys['key2']))
@@ -142,6 +148,7 @@ def run_example():
     for usage in storage_client.usages.list_by_location("westus"):
         print('\t{}'.format(usage.name.value))
 
+
 def print_item(group):
     """Print an Azure object instance."""
     print("\tName: {}".format(group.name))
@@ -151,12 +158,14 @@ def print_item(group):
     if hasattr(group, 'properties'):
         print_properties(group.properties)
 
+
 def print_properties(props):
     """Print a ResourceGroup properties instance."""
     if props and props.provisioning_state:
         print("\tProperties:")
         print("\t\tProvisioning State: {}".format(props.provisioning_state))
     print("\n\n")
+
 
 if __name__ == "__main__":
     run_example()
