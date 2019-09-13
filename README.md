@@ -1,7 +1,11 @@
 ---
-services: storage
-platforms: python
-author: lmazuel
+page_type: sample
+languages:
+- python
+products:
+- azure
+description: "This sample shows how to manage your storage account using the Azure Storage Management package for Python. The Storage Resource Provider is a client library for working with the storage accounts in your Azure subscription."
+urlFragment: storage-python-manage
 ---
 
 [![Build Status](https://travis-ci.org/Azure-Samples/storage-python-manage.svg?branch=master)](https://travis-ci.org/Azure-Samples/storage-python-manage)
